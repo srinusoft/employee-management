@@ -1,0 +1,43 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 1px solid black;
+    position: relative;
+    top: 20%;
+    bottom: 40%;
+    height: auto;
+    bottom: 40%;
+    left: 30%;
+    width: 40%;
+    border-radius: 5px;
+    background-color: lightskyblue;
+    gap: 5px;
+}
+
+h2 {
+    margin-bottom: 2px;
+}
+
+form {
+    div {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between; /* Pushes items to opposite sides */
+         align-items: center;
+    }
+    display: flex;
+    flex-direction: column;
+    gap: 5px;  
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+div label {
+    color: black;
+    
+}

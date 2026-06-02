@@ -1,0 +1,30 @@
+<div class="login-container">
+    <h2>Employee Management portal</h2>
+    <h4>Sign in to access your workspace</h4>
+    <form>
+         <mat-form-field>
+            <mat-label>Corporate Email address</mat-label>
+            <input matInput type="text" />
+            <span matTextPrefix><mat-icon aria-hidden="false" aria-label="Example person icon" fontIcon="person"></mat-icon>
+</span>
+            <mat-hint align="start">e.g., srinivas.pand&#64;company.com</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide() ? 'password' : 'text'" />
+                    <span matTextPrefix><mat-icon aria-hidden="false" aria-label="Example lock icon" fontIcon="lock"></mat-icon>
+</span>
+            <button matIconButton matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()">
+                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <div>
+        <mat-checkbox>Remember me</mat-checkbox> <a href="#">forgot password?</a>     
+        </div>
+        
+        <button mat-raised-button color="primary">Login</button>
+        <br><br>
+    </form>
+</div>
