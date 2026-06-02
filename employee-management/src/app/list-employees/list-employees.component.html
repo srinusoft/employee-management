@@ -1,5 +1,6 @@
 <p>list-employees works!</p>
- <input type="search" matInput placeholder="search employees">
+<app-create-employee #createEmployee (fromchild)="onFromChildClicked($event)"></app-create-employee>
+ <input type="search" matInput placeholder="search employees" (keyup)="onFilterTextBoxChanged($event)">
   
 <div class="content" style="width: 100%;padding-top: 20px;">
   <!-- The AG Grid component, with Dimensions, CSS Theme, Row Data, and Column Definition -->

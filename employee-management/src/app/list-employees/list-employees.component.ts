@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, viewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Module
 import type { ColDef } from 'ag-grid-community'; // Column Definition Type Interface
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
-import {MatSlideToggle} from '@angular/material/slide-toggle';
+import { CreateEmployeeComponent } from '../create-employee/create-employee.component';
 
 // Register all Community features
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -14,7 +14,7 @@ interface IRow {
   firstname: string;
   lastname: string;
   department: string;
-  role: string;
+  role: string; 
   email: string;
   status: string;
   phone: string;
@@ -25,11 +25,13 @@ interface IRow {
 @Component({  
   selector: 'app-list-employees',
   standalone: true,
-  imports: [AgGridAngular, MatSlideToggle],
+  imports: [AgGridAngular, CreateEmployeeComponent],
   templateUrl: './list-employees.component.html',
   styleUrls: ['./list-employees.component.scss']
 })
 export class ListEmployeesComponent {
+
+
   rowData: IRow[] = [
     { id: 1000001, firstname: 'Jane', lastname: 'Doe', department: 'Engineering', role: 'Developer', email: 'jane.doe@staffhub.com', status: 'Active', phone: '555-0123', hireDate: '2024-01-15' },
     { id: 1000002, firstname: 'John', lastname: 'Smith', department: 'Marketing', role: 'Manager', email: 'john.smith@staffhub.com', status: 'Active', phone: '555-0456', hireDate: '2023-11-04' },
@@ -44,10 +46,11 @@ export class ListEmployeesComponent {
     { id: 1000011, firstname: 'Mia', lastname: 'Davis', department: 'HR', role: 'Recruiter', email: 'mia.davis@staffhub.com', status: 'Active', phone: '555-2425', hireDate: '2024-04-05' },
     { id: 1000012, firstname: 'William', lastname: 'Wilson', department: 'Marketing', role: 'Content Strategist', email: 'william.wilson@staffhub.com', status: 'Active', phone: '555-2627', hireDate: '2022-10-28' },
     { id: 1000013, firstname: 'Isabella', lastname: 'Lopez', department: 'Sales', role: 'Account Executive', email: 'isabella.lopez@staffhub.com', status: 'Active', phone: '555-2829', hireDate: '2023-07-09' },
-    { id: 1000014, firstname: 'James', lastname: 'Clark', department: 'Finance', role: 'Controller', email: 'james.clark@staffhub.com', status: 'Active', phone: '555-3031', hireDate: '2021-03-14' },
-    { id: 1000015, firstname: 'Charlotte', lastname: 'Walker', department: 'Engineering', role: 'Product Manager', email: 'charlotte.walker@staffhub.com', status: 'Active', phone: '555-3233', hireDate: '2024-05-02' }
+    { id: 1000014, firstname: 'James', lastname: 'Clark', department: 'Finance', role: 'Controller', email: 'james.clark@staffhub.com', status: 'Act      ive', phone: '555-3031', hireDate: '2021-03-14' },
+    { id: 1000015, firstname: 'Charlotte', lastname: 'Walker', department: 'Engineering', role: 'Product Manager', email: 'charlotte.walker@staffhub.com', status: 'Active', phone: '555-3233', hireDate: '2024-05-02'}
   ];
 
+   intialData: IRow[] = [...this.rowData];
     // Column Definitions: Defines the columns to be displayed.
     colDefs: ColDef<IRow>[] = [
         { field: "id", width: 150 },
@@ -66,5 +69,28 @@ export class ListEmployeesComponent {
     filter: true,
     sortable: true, 
   };
+
+  onFilterTextBoxChanged(event: KeyboardEvent) {
+    const target = event.target as HTMLInputElement;
+    const filterText = target.value;
+
+    if(filterText === ''){
+      this.rowData = [...this.intialData];
+    }
+
+    else {
+       this.rowData = this.rowData.filter(row => row.firstname.toLowerCase().includes(filterText.toLowerCase()))
+    } 
+
+    // this.rowData = this.rowData.filter(row => {
+    //   return Object.values(row).some(value => 
+    //     String(value).toLowerCase().includes(filterText.toLowerCase())
+    //   );
+    // });
+  }
+
+  onFromChildClicked(event: string){
+    console.log('event from child ==>', event);
+  }
 
 }
